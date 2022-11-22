@@ -20,6 +20,28 @@ namespace R5T.F0079
             return componentRenderer;
         }
 
+        public static async Task<TComponentRenderer> ModifyWith<TComponentRenderer>(this TComponentRenderer componentRenderer,
+            Func<TComponentRenderer, Task> componentRendererAction)
+            where TComponentRenderer : ComponentRenderer
+        {
+            await Operations.Instance.Modify(
+                componentRenderer,
+                componentRendererAction);
+
+            return componentRenderer;
+        }
+
+        public static TComponentRenderer ModifyWith<TComponentRenderer>(this TComponentRenderer componentRenderer,
+            Action<TComponentRenderer> componentRendererAction)
+            where TComponentRenderer : ComponentRenderer
+        {
+            Operations.Instance.Modify(
+                componentRenderer,
+                componentRendererAction);
+
+            return componentRenderer;
+        }
+
         public static async Task<string> Render<TComponent>(this ComponentRenderer<TComponent> componentRenderer)
             where TComponent : IComponent
         {

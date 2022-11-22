@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 using R5T.T0132;
-
+using Microsoft.VisualBasic;
 
 namespace R5T.F0079
 {
@@ -77,6 +77,30 @@ namespace R5T.F0079
 
             var output = propertyInfo.Name;
             return output;
+        }
+
+        public async Task<TComponentRenderer> Modify<TComponentRenderer>(
+            TComponentRenderer componentRenderer,
+            Func<TComponentRenderer, Task> componentRendererAction)
+            where TComponentRenderer : ComponentRenderer
+        {
+            await F0000.ActionOperator.Instance.Run_OkIfDefault(
+                componentRendererAction,
+                componentRenderer);
+
+            return componentRenderer;
+        }
+
+        public TComponentRenderer Modify<TComponentRenderer>(
+            TComponentRenderer componentRenderer,
+            Action<TComponentRenderer> componentRendererAction)
+            where TComponentRenderer : ComponentRenderer
+        {
+            F0000.ActionOperator.Instance.Run_OkIfDefault(
+                componentRendererAction,
+                componentRenderer);
+
+            return componentRenderer;
         }
 
         public async Task<string> Render<TComponent>(ComponentRenderer<TComponent> componentRenderer)
