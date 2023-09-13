@@ -85,8 +85,8 @@ namespace R5T.F0079
             where TComponentRenderer : ComponentRenderer
         {
             await F0000.ActionOperator.Instance.Run_OkIfDefault(
-                componentRendererAction,
-                componentRenderer);
+                componentRenderer,
+                componentRendererAction);
 
             return componentRenderer;
         }
