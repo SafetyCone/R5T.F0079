@@ -96,9 +96,9 @@ namespace R5T.F0079
             Action<TComponentRenderer> componentRendererAction)
             where TComponentRenderer : ComponentRenderer
         {
-            F0000.ActionOperator.Instance.Run_OkIfDefault(
-                componentRendererAction,
-                componentRenderer);
+            Instances.ActionOperator.Run_OkIfDefault(
+                componentRenderer,
+                componentRendererAction);
 
             return componentRenderer;
         }
