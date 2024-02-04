@@ -8,12 +8,13 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 using R5T.T0132;
-using Microsoft.VisualBasic;
+
 
 namespace R5T.F0079
 {
@@ -84,7 +85,7 @@ namespace R5T.F0079
             Func<TComponentRenderer, Task> componentRendererAction)
             where TComponentRenderer : ComponentRenderer
         {
-            await F0000.ActionOperator.Instance.Run_OkIfDefault(
+            await Instances.ActionOperator.Run_OkIfDefault(
                 componentRenderer,
                 componentRendererAction);
 
@@ -135,6 +136,10 @@ namespace R5T.F0079
 
             var writer = new StringWriter();
 
+            // NO LONGER WORKS - as of entry-point console applications targeting net8.0.
+            // You receive a nasty error:
+            // System.InvalidOperationException: 'The current thread is not associated with the Dispatcher. Use InvokeAsync() to switch execution to the Dispatcher when triggering rendering or component state.'
+            // See new work for net8.0 in: R5T.F0144.
             content.WriteTo(writer, HtmlEncoder.Default);
 
             var output = writer.ToString();

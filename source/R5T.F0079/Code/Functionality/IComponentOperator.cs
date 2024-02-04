@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -59,7 +60,7 @@ namespace R5T.F0079
             // Make a copy of the services set, so that when services are added for each component, they do not change the original services set in the rendering context.
             var servicesCopy = new ServiceCollection();
             
-            servicesCopy.AddRange(componentRenderingContext.Services);
+            servicesCopy.Add_Range(componentRenderingContext.Services);
 
             var componentRenderer = this.NewRenderer<TComponent>(servicesCopy);
             return componentRenderer;
